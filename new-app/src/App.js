@@ -37,7 +37,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <Emergencies emergencies={this.state.emergencies}/>
       <Home/>
       </div>
     );
