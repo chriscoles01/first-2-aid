@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Location from './components/Location.js'
 import Emergencies from './components/Emergencies.js'
-import {geolocated} from 'react-geolocated';
+//import {geolocated} from 'react-geolocated';
 
 class App extends Component {
   state = {
@@ -11,19 +11,25 @@ class App extends Component {
       {
         id: 1,
         name: 'Simon Brooks',
+        description: 'Major laceration on left arm, heavy bleeding',
         distance: '450m',
+        location: '[coordinates]',
         expanded: true
       },
       {
         id: 2,
         name: 'Chris Coles',
+        description: 'Heart palpatations',
         distance: '666m',
+        location: '[coordinates]',
         expanded: false
       },
       {
         id: 3,
         name: 'Vlad Secosan',
+        description: 'Concussion',
         distance: '72m',
+        location: '[coordinates]',
         expanded: false
       }
     ]
