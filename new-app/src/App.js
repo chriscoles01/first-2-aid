@@ -10,19 +10,25 @@ class App extends Component {
       {
         id: 1,
         name: 'Simon Brooks',
+        description: 'Major laceration on left arm, heavy bleeding',
         distance: '450m',
+        location: '[coordinates]',
         expanded: true
       },
       {
         id: 2,
         name: 'Chris Coles',
+        description: 'Heart palpatations',
         distance: '666m',
+        location: '[coordinates]',
         expanded: false
       },
       {
         id: 3,
         name: 'Vlad Secosan',
+        description: 'Concussion',
         distance: '72m',
+        location: '[coordinates]',
         expanded: false
       }
     ]
