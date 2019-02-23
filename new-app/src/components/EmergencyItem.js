@@ -72,7 +72,7 @@ class RecipeReviewCard extends React.Component {
           <CardContent>
             <div>
               <Button color="secondary" variant="contained" href={mapUrl} className={classes.button}>Get directions</Button>
-              <Location coords={this.state.coords}/>
+              <Location />
             </div>
           </CardContent>
         </Collapse>

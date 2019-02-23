@@ -29,11 +29,6 @@ class SimpleMap extends Component {
             lng={this.props.location.coords.longitude}
             text={<img src={marker} alt="marker" />}
           />
-          <AnyReactComponent
-            lat={this.props.location.coords.latitude}
-            lng={this.props.location.coords.longitude}
-            text={<img src={marker} alt="marker" />}
-          />
         </GoogleMapReact>
       </div>
     );
