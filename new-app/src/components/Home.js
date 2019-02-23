@@ -4,7 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import HomeForm from './HomeForm'
 import Grid from '@material-ui/core/Grid'
-import logo from '../logo.svg';
+import logo from '../graphics-assets/Logo_Font_Slogan.png';
 import Location from './Location.js'
 
 class Home extends React.Component{
