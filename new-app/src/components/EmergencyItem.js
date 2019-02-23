@@ -42,9 +42,11 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const lat = this.props.emergency.latitude;
-    const lng = this.props.emergency.longditude;
-    const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + lng + "," + lat;
+    const userLng = this.props.emergency.userLng;
+    const userLat = this.props.emergency.userLat;
+    const destLng = this.props.emergency.destLng;
+    const destLat = this.props.emergency.destLat;
+    const mapUrl = "http://maps.google.com/?saddr=" + userLng + "," + userLat + "&daddr=" + destLng + "," + destLat;
 
     return (
       <Card className={classes.card}>
@@ -70,7 +72,7 @@ class RecipeReviewCard extends React.Component {
           <CardContent>
             <div>
               <Button color="secondary" variant="contained" href={mapUrl} className={classes.button}>Get directions</Button>
-              <Location />
+              <Location coords={this.state.coords}/>
             </div>
           </CardContent>
         </Collapse>

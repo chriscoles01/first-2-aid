@@ -11,15 +11,16 @@ import Emergencies from './Emergencies.js'
 class Home extends React.Component{
 
   state = {
-    
     emergencies: [
       {
         id: 1,
         name: 'Simon Brooks',
         description: 'Major laceration on left arm, heavy bleeding',
         distance: '450m',
-        longditude: '50.920505',
-        latitude: '-1.404671',
+        userLng: "50.937681",
+        userLat: "-1.395844",
+        destLng: '50.920505',
+        destLat: '-1.404671',
         expanded: true
       },
       {
@@ -27,17 +28,21 @@ class Home extends React.Component{
         name: 'Chris Coles',
         description: 'Heart palpatations',
         distance: '666m',
-        longditude: '50.920505',
-        latitude: '-1.404671',
+        userLng: "50.937681",
+        userLat: "-1.395844",
+        destLng: '50.920505',
+        destLat: '-1.404671',
         expanded: false
       },
       {
         id: 3,
         name: 'Vlad Secosan',
         description: 'Concussion',
+        userLng: "50.937681",
+        userLat: "-1.395844",
         distance: '72m',
-        longditude: '50.920505',
-        latitude: '-1.404671',
+        destLng: '50.920505',
+        destLat: '-1.404671',
         expanded: false
       }
     ]
