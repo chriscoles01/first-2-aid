@@ -9,15 +9,14 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
+
 
 const styles = theme => ({
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
-  // actions: {
-  //   display: 'flex',
-  // },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -42,13 +41,16 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const lat = this.props.emergency.latitude;
+    const lng = this.props.emergency.longditude;
+    const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + lng + "," + lat;
 
     return (
       <Card className={classes.card}>
         <CardContent>
-            <h3>
+            <h1>
                 {this.props.emergency.name}, {this.props.emergency.distance}
-            </h3>
+            </h1>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>          
           <IconButton
@@ -64,9 +66,10 @@ class RecipeReviewCard extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <p>
-              {this.props.emergency.description}
-            </p>
+            <div>
+              <p>{this.props.emergency.description}</p>
+              <Button color="secondary" variant="contained" href={mapUrl} className={classes.button}>Show on Map</Button>
+            </div>
           </CardContent>
         </Collapse>
       </Card>
