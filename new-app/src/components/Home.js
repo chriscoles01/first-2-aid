@@ -11,6 +11,7 @@ import Emergencies from './Emergencies.js'
 class Home extends React.Component{
 
   state = {
+    
     emergencies: [
       {
         id: 1,

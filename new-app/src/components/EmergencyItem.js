@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
+import Location from './Location.js'
 
 
 const styles = theme => ({
@@ -48,9 +49,10 @@ class RecipeReviewCard extends React.Component {
     return (
       <Card className={classes.card}>
         <CardContent>
-            <h1>
-                {this.props.emergency.name}, {this.props.emergency.distance}
-            </h1>
+          <div>
+            <h1>{this.props.emergency.name}, {this.props.emergency.distance}</h1>
+            <p>{this.props.emergency.description}</p>
+          </div>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>          
           <IconButton
@@ -67,8 +69,8 @@ class RecipeReviewCard extends React.Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <div>
-              <p>{this.props.emergency.description}</p>
-              <Button color="secondary" variant="contained" href={mapUrl} className={classes.button}>Show on Map</Button>
+              <Button color="secondary" variant="contained" href={mapUrl} className={classes.button}>Get directions</Button>
+              <Location />
             </div>
           </CardContent>
         </Collapse>
