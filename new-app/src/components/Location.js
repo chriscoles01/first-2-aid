@@ -3,28 +3,26 @@ import {geolocated} from 'react-geolocated';
 import SimpleMap from './SimpleMap.js'
 class Location extends React.Component {
     
-    getLocation = () => {
-        const geolocation = navigator.geolocation;
-        
-        const location = new Promise((resolve, reject) => {
-            if (!geolocation) {
-            reject(new Error('Not Supported'));
-            }
-            
-            geolocation.getCurrentPosition((position) => {
-            resolve(position);
-            }, () => {
-            reject (new Error('Permission denied'));
-            });
-        });
-        return location
+    askForLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.showPosition.bind(this));
+        } else {
+            this.startSearch();
+        }
+    }
+      
+    showPosition(position) {
+        this.setState({
+            lat: position.coords.latitude,
+            lon: position.coords.longitude
+        }, this.startSearch.bind(this, true));
     }
     render() {
         
         const coords = {
             coords: this.props.coords
         }
-        this.getLocation();
+        this.askForLocation.bind(this);
         return !this.props.isGeolocationAvailable
         ? <div>Your browser does not support Geolocation</div>
         : !this.props.isGeolocationEnabled
