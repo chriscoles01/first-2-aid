@@ -11,17 +11,19 @@ class Home extends React.Component{
     render (){
         return(
         <React.Fragment>
-            <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-        <div>
-          <Button mx="auto" variant="contained" color="secondary">
-          Share
-        </Button>
-        <Button mx="auto" variant="contained" color="secondary">
-        Learn More
-        </Button>
-        </div>
-        </header>
+          <header className="App-header">
+            <img src={logo} className="App-logo" alt="logo" />
+              <div>
+              <Grid container spacing={24}>
+                <Grid item mx={5}>
+                  <Button mx="auto" variant="contained" color="secondary">Help</Button>
+                </Grid>
+                <Grid item mx={5}>
+                  <Button mx="auto" variant="contained" color="secondary">Login</Button>
+                </Grid>
+              </Grid>
+            </div>
+          </header>
     </React.Fragment>
         );
     }
