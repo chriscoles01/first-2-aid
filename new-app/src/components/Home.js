@@ -11,47 +11,14 @@ import Emergencies from './Emergencies.js'
 class Home extends React.Component{
 
   componentDidMount() {
-    fetch('https://api.mydomain.com')
+    fetch('http://127.0.0.1:5000/')
       .then(response => response.json())
-      .then(data => this.setState({ data }));
+      .then(data => this.setState({ emergencies: data }));
+      console.log(this.state)
   }
 
   state = {
-    emergencies: [
-      {
-        id: 1,
-        name: 'Simon Brooks',
-        description: 'Major laceration on left arm, heavy bleeding',
-        distance: '450m',
-        userLng: "50.937681",
-        userLat: "-1.395844",
-        destLng: '50.920505',
-        destLat: '-1.404671',
-        expanded: true
-      },
-      {
-        id: 2,
-        name: 'Chris Coles',
-        description: 'Heart palpatations',
-        distance: '666m',
-        userLng: "50.937681",
-        userLat: "-1.395844",
-        destLng: '50.920505',
-        destLat: '-1.404671',
-        expanded: false
-      },
-      {
-        id: 3,
-        name: 'Vlad Secosan',
-        description: 'Concussion',
-        userLng: "50.937681",
-        userLat: "-1.395844",
-        distance: '72m',
-        destLng: '50.920505',
-        destLat: '-1.404671',
-        expanded: false
-      }
-    ]
+    emergencies: []
   }
 
   render (){

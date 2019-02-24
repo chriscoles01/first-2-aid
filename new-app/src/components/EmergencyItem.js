@@ -44,16 +44,17 @@ class RecipeReviewCard extends React.Component {
     const { classes } = this.props;
     const userLng = this.props.emergency.userLng;
     const userLat = this.props.emergency.userLat;
-    const destLng = this.props.emergency.destLng;
-    const destLat = this.props.emergency.destLat;
+    const location  = this.props.emergency.place == null ? [0,0] : this.props.emergency.place.bounding_box.coordinates[0][0]
+    const destLng = location[1];
+    const destLat = location[0];
     const mapUrl = "http://maps.google.com/?saddr=" + userLng + "," + userLat + "&daddr=" + destLng + "," + destLat;
-
+    
     return (
       <Card className={classes.card}>
         <CardContent>
           <div>
-            <h1>{this.props.emergency.name}, {this.props.emergency.distance}</h1>
-            <p>{this.props.emergency.description}</p>
+            <h1>{this.props.emergency.user.name}, {this.props.emergency.place == null ? "no location" : this.props.emergency.place.bounding_box.coordinates[0][0][1]}</h1>
+            <p>{this.props.emergency.text}</p>
           </div>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>          
@@ -72,7 +73,7 @@ class RecipeReviewCard extends React.Component {
           <CardContent>
             <div>
             <Button color="secondary" variant="contained" onClick={ () => window.open(mapUrl,'_blank')} className={classes.button}>Get Directions</Button>            
-              <Location />
+            <Location emergency_location={ location}/>
             </div>
           </CardContent>
         </Collapse>

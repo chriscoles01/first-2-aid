@@ -5,6 +5,7 @@ import json
 
 from flask import Flask
 from flask_restful import Resource, Api
+from flask_cors import CORS
 
 
 
@@ -23,11 +24,8 @@ ACCESS_TOKEN_SECRET="bEV75aRZaKbYqmJYxs7svx4cSWRg4r4gzj2fzpa5n8W40"
 auth = tweepy.OAuthHandler(API_KEY, API_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-api = tweepy.API(auth)
-max_tweets=18
-query='#first2aid'
-searched_tweets = [status._json for status in tweepy.Cursor(api.search,  q=query).items(max_tweets)]
-json_strings = [json.dumps(json_obj) for json_obj in searched_tweets]  
+
+
 
 
 
@@ -39,9 +37,14 @@ json_strings = [json.dumps(json_obj) for json_obj in searched_tweets]
 
 app = Flask(__name__)
 api = Api(app)
-
+CORS(app)
 class GetList(Resource):
     def get(self):
+        api = tweepy.API(auth)
+        max_tweets=18
+        query='#first2me'
+        searched_tweets = [status._json for status in tweepy.Cursor(api.search,  q=query).items(max_tweets)]
+        json_strings = [json.dumps(json_obj) for json_obj in searched_tweets]  
         file = [json.loads(json_string) for json_string in json_strings]
         
         
