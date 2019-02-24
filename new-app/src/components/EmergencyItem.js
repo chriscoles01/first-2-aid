@@ -45,7 +45,7 @@ const styles = theme => ({
 });
 
 class EmergencyItem extends React.Component {
-  state = { expanded: false };
+  state = { expanded: false, replySent: false };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -81,9 +81,12 @@ class EmergencyItem extends React.Component {
         },
         body: JSON.stringify({
           username: this.props.emergency.user.screen_name,
-          id: this.props.emergency.id_str
+          id: this.props.emergency.id_str,
+          name: this.props.name.name
         })
       })
+      this.setState({replySent: true})
+
   }
 
   render() {
@@ -100,11 +103,11 @@ class EmergencyItem extends React.Component {
       <Card className={classes.card}>
       <CardHeader
           avatar={
-            <Avatar  className={classes.avatar}/>
+            <Avatar  className={this.state.replySent ? classes.finishedavatar : classes.avatar}/>
 
           }
           
-          title= {"NEEDS ATTENTION,  " + this.props.emergency.created_at}
+          title={ this.state.replySent ? "First responder on the way,  " + this.props.emergency.created_at:  "NEEDS ATTENTION,  " + this.props.emergency.created_at}
 
         />
         <CardContent>
