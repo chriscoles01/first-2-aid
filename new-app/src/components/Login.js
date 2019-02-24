@@ -69,9 +69,12 @@ export default class App extends Component {
           : <div>
               <Button 
                 onClick={this.startAuth.bind(this)}
+                mx="auto" variant="contained" color="primary"
               >
-                Twitter login
+                First Aider Twitter login
               </Button>
+
+
             </div>
         }
       </div>

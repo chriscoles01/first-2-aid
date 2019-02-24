@@ -3,9 +3,9 @@ import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import logo from '../graphics-assets/Logo_Font_Slogan.png';
-
+// import RequestForm from './RequestForm.js'
 import Emergencies from './Emergencies.js'
-
+import Login from './Login.js'
 const styles = theme => ({
   parent: {
     display: 'flex',
@@ -20,13 +20,30 @@ const styles = theme => ({
 });
 
 class Home extends React.Component{
+  state = {
+    emergencies: [],
+    myLoc: [],
+    requestEnabled: false
+  }
 
+  toggleRequest = () => {
+    this.setState({requestEnabled: !this.state.requestEnabled})
+  }
+
+
+  askForLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showPosition.bind(this));
+    }
+}
   
   componentDidMount() {
     fetch('http://127.0.0.1:5000/')
     .then(response => response.json())
     .then(data => this.setState({ emergencies: data }));
+    this.askForLocation()
     console.log(this.state)
+   
   }
   getData = () => {
     fetch('http://127.0.0.1:5000/')
@@ -35,25 +52,31 @@ class Home extends React.Component{
     console.log(this.state)
 }
   
-  state = {
-    emergencies: [],
-    myLoc: []
-  }
+  
+  
+showPosition(position) {
+    this.setState({
+        myLoc: [position.coords.longitude, position.coords.latitude]
+    });
+}
+   
 
   render (){
     
     const { classes } = this.props;
-    
     return(
       <div className={classes.parent}>
          
           <div>
-          <Button mx="auto" variant="contained" color="primary" >First Aider Login</Button>
+          <Login/>
           </div>
           <img src={logo} className="App-logo" alt="logo" />
           <span className={classes.helpButton}>
           <Button size="large"  classes={{ sizeLarge: classes.bigButton }} variant="contained" color="secondary">Get a first responder</Button>
           </span>
+          {
+            // this.state.requestEnabled ? <RequestForm/> : <br/>
+          }
           <br/>
           <br/>
           <div>
