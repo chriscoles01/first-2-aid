@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import marker from '../graphics-assets/Logo_32.png';
-
+import home from '../graphics-assets/you.png';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
  
 class SimpleMap extends Component {
@@ -48,7 +48,7 @@ class SimpleMap extends Component {
           <AnyReactComponent
             lat={this.props.location.coords.latitude}
             lng={this.props.location.coords.longitude}
-            text={<img src={marker} alt="marker" />}
+            text={<img src={home} alt="marker" />}
           />
           <AnyReactComponent
             lat={this.props.emergency_location.location[1]}
