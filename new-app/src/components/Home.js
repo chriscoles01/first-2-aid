@@ -25,7 +25,8 @@ class Home extends React.Component{
   state = {
     emergencies: [],
     myLoc: [],
-    requestEnabled: false
+    requestEnabled: false,
+    loggedin: false
   }
 
   toggleRequest = () => {
@@ -54,7 +55,12 @@ class Home extends React.Component{
     console.log(this.state)
 }
   
-  
+  authenticate = (logged , name) => {
+    console.log(name)
+    this.setState({loggedin: logged, name: name})
+  }
+
+
   
 showPosition(position) {
     this.setState({
@@ -65,6 +71,7 @@ showPosition(position) {
 
   render (){
     
+    
     const { classes } = this.props;
     return(
       <div className={classes.parent}>
@@ -74,10 +81,11 @@ showPosition(position) {
           <div>
           <Grid container spacing={24} align="center">
             <Grid item xs={24}>
-              <Login/>
+              <Login authenticate={this.authenticate}/>
             </Grid>
             <Grid item xs>
-              <Button variant="contained" color="primary" onClick={() => this.getData()}>Reload</Button>
+              {this.state.loggedin ? <Button variant="contained" color="primary" onClick={() => this.getData()}>Reload</Button> : <div></div>}
+              
             </Grid>
           </Grid>
           </div>
@@ -87,7 +95,7 @@ showPosition(position) {
           <br/>
           <br/>
           <div>
-          <Emergencies emergencies = {this.state.emergencies} myLoc = {this.state.myLoc}/>
+          <Emergencies emergencies = {this.state.emergencies} myLoc = {this.state.myLoc} name={this.state.name} loggedin={{loggedin: this.state.loggedin}}/>
           </div>
       </div>
      
