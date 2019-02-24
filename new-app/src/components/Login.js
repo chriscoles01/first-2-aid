@@ -46,27 +46,30 @@ export default class App extends Component {
       )
     }
 
-  startAuth() {
+  startAuth(name) {
     if (!this.state.disabled) {  
       this.popup = this.openPopup() 
       this.checkPopup()
       this.setState({disabled: 'disabled'})
+      this.props.authenticate(true, name)       
+
     }
   }
 
   closeCard() {
+    this.props.authenticate(false)
     this.setState({user: {}})
   }
 
   render() {
-    const { name, photo} = this.state.user
+    const { name} = this.state.user
   
     return (
       <div className={'container'}>
         {/* If there is a user, show the user */}
         {/* Otherwise show the login button */}
         {name
-          ? <div>              
+          ? <div>    
               <Button
                 variant="contained"
                 color="primary"
@@ -75,7 +78,7 @@ export default class App extends Component {
             </div>
           : <div>
               <Button 
-                onClick={this.startAuth.bind(this)}
+                onClick={() => this.startAuth(name)}
                 mx="auto" variant="contained" color="primary"
               >
                 First Aider Twitter login
