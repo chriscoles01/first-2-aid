@@ -68,23 +68,19 @@ showPosition(position) {
     const { classes } = this.props;
     return(
       <div className={classes.parent}>
-         
-          <div>
-          </div>
           <img src={logo} className="App-logo" alt="logo" />
           <span className={classes.helpButton}>
           </span>
-          <Grid container spacing={4} align="center">
-            <Grid item xs>
+          <div>
+          <Grid container spacing={24} align="center">
+            <Grid item xs={24}>
               <Login/>
-            </Grid>
-            <Grid item xs>
-              <Button variant="contained" color="secondary">Get a first responder</Button>
             </Grid>
             <Grid item xs>
               <Button variant="contained" color="primary" onClick={() => this.getData()}>Reload</Button>
             </Grid>
           </Grid>
+          </div>
           {
             // this.state.requestEnabled ? <RequestForm/> : <br/>
           }
