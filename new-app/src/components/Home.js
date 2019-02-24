@@ -1,11 +1,9 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import HomeForm from './HomeForm'
+
 import Grid from '@material-ui/core/Grid'
 import logo from '../graphics-assets/Logo_Font_Slogan.png';
-import Location from './Location.js'
+
 import Emergencies from './Emergencies.js'
 
 class Home extends React.Component{
@@ -18,7 +16,8 @@ class Home extends React.Component{
   }
 
   state = {
-    emergencies: []
+    emergencies: [],
+    myLoc: []
   }
 
   render (){
@@ -38,7 +37,7 @@ class Home extends React.Component{
           </div>
         </header>
         <body>
-          <Emergencies emergencies = {this.state.emergencies} />
+          <Emergencies emergencies = {this.state.emergencies} myLoc = {this.state.myLoc}/>
         </body>
       </React.Fragment>
     );
