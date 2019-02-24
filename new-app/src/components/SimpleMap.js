@@ -29,7 +29,8 @@ class SimpleMap extends Component {
  
   
   render() {
-    const zoom = 1000/this.distance(this.props.location.coords.latitude, this.props.location.coords.longitude, this.props.emergency_location.location[1], this.props.emergency_location.location[0])
+    const distance = this.distance(this.props.location.coords.latitude, this.props.location.coords.longitude, this.props.emergency_location.location[1], this.props.emergency_location.location[0])
+    const zoom = distance < 20 ? 12 : 7
     console.log(zoom)
     const center = {
         lat: (this.props.location.coords.latitude + this.props.emergency_location.location[1]) / 2,
