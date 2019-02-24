@@ -60,7 +60,6 @@ export default class App extends Component {
 
   render() {
     const { name, photo} = this.state.user
-    const { disabled } = this.state
   
     return (
       <div className={'container'}>

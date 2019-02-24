@@ -72,6 +72,20 @@ class EmergencyItem extends React.Component {
     }
   }
 
+  post = () => {
+    fetch('http://127.0.0.1:8080/twitter/reply', {
+      method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: this.props.emergency.user.screen_name,
+          id: this.props.emergency.id_str
+        })
+      })
+  }
+
   render() {
     const { classes } = this.props;
     const userLng = this.props.myLoc.myLoc[1];
@@ -118,6 +132,7 @@ class EmergencyItem extends React.Component {
             <Button color="secondary" variant="contained" onClick={ () => window.open(mapUrl,'_blank')} className={classes.button}>Get Directions</Button>            
             <Location emergency_location={ location}/>
             </div>
+            <Button onClick={() => {this.post()}}>Post reply</Button>
           </CardContent>
         </Collapse>
       </Card>
