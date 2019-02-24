@@ -6,6 +6,8 @@ import logo from '../graphics-assets/Logo_Font_Slogan.png';
 // import RequestForm from './RequestForm.js'
 import Emergencies from './Emergencies.js'
 import Login from './Login.js'
+import Grid from '@material-ui/core/Grid';
+
 const styles = theme => ({
   parent: {
     display: 'flex',
@@ -68,20 +70,27 @@ showPosition(position) {
       <div className={classes.parent}>
          
           <div>
-          <Login/>
           </div>
           <img src={logo} className="App-logo" alt="logo" />
           <span className={classes.helpButton}>
-          <Button size="large"  classes={{ sizeLarge: classes.bigButton }} variant="contained" color="secondary">Get a first responder</Button>
           </span>
+          <Grid container spacing={4} align="center">
+            <Grid item xs>
+              <Login/>
+            </Grid>
+            <Grid item xs>
+              <Button variant="contained" color="secondary">Get a first responder</Button>
+            </Grid>
+            <Grid item xs>
+              <Button variant="contained" color="primary" onClick={() => this.getData()}>Reload</Button>
+            </Grid>
+          </Grid>
           {
             // this.state.requestEnabled ? <RequestForm/> : <br/>
           }
           <br/>
           <br/>
           <div>
-          <Button size="large"  variant="contained" color="primary" onClick={() => this.getData()}>Reload</Button>
-
           <Emergencies emergencies = {this.state.emergencies} myLoc = {this.state.myLoc}/>
           </div>
       </div>

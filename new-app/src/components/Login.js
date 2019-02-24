@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import io from 'socket.io-client'
+import io from 'socket.io-client';
 import Button from '@material-ui/core/Button';
 const API_URL = 'http://127.0.0.1:8080'
 const socket = io(API_URL)
@@ -68,11 +68,11 @@ export default class App extends Component {
         {/* Otherwise show the login button */}
         {name
           ? <div>              
-              <img src={photo} alt={name} />
-              <h4>{`@${name}`}</h4>
               <Button
+                variant="contained"
+                color="primary"
                 onClick={this.closeCard.bind(this)}
-              >Logout</Button>
+              >Logout {`@${name}`}</Button>
             </div>
           : <div>
               <Button 
