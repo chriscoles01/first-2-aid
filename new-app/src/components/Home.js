@@ -10,6 +10,12 @@ import Emergencies from './Emergencies.js'
 
 class Home extends React.Component{
 
+  componentDidMount() {
+    fetch('https://api.mydomain.com')
+      .then(response => response.json())
+      .then(data => this.setState({ data }));
+  }
+
   state = {
     emergencies: [
       {

@@ -71,7 +71,7 @@ class RecipeReviewCard extends React.Component {
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
             <div>
-              <Button color="secondary" variant="contained" href={mapUrl} className={classes.button}>Get directions</Button>
+            <Button color="secondary" variant="contained" onClick={ () => window.open(mapUrl,'_blank')} className={classes.button}>Get Directions</Button>            
               <Location />
             </div>
           </CardContent>
