@@ -84,7 +84,7 @@ app.post('/twitter/reply', (req, res) => {
   
   
 
-  string_status = 'first responder coming  @' + req.body.username
+  string_status = ' certified first responder coming  @' + req.body.username
   T.post('statuses/update', {status: string_status, in_reply_to_status_id: req.body.id,  }, function(err, data, response) {
     console.log(data)
   })
