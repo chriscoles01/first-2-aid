@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import EmergencyItem2 from './EmergencyItem';
+import EmergencyItem from './EmergencyItem';
 import PropTypes from 'prop-types';
 
 class Emergencies extends Component {
-    render() {
-        return this.props.emergencies.map((emergency) => (
-            <EmergencyItem2 key={emergency.id} emergency={emergency}/>
-
-        ));
-    }
+  render() {
+    return this.props.emergencies.map((emergency) => (
+      <EmergencyItem key={emergency.id_str} emergency={emergency}/>
+    ));
+  }
 }
 
 // PropTypes

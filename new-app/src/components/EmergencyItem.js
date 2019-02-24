@@ -9,15 +9,15 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Button from '@material-ui/core/Button';
+import Location from './Location.js'
+
 
 const styles = theme => ({
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
-  // actions: {
-  //   display: 'flex',
-  // },
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -42,13 +42,20 @@ class RecipeReviewCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    const userLng = this.props.emergency.userLng;
+    const userLat = this.props.emergency.userLat;
+    const location  = this.props.emergency.place == null ? [0,0] : this.props.emergency.place.bounding_box.coordinates[0][0]
+    const destLng = location[1];
+    const destLat = location[0];
+    const mapUrl = "http://maps.google.com/?saddr=" + userLng + "," + userLat + "&daddr=" + destLng + "," + destLat;
+    
     return (
       <Card className={classes.card}>
         <CardContent>
-            <h3>
-                {this.props.emergency.name}, {this.props.emergency.distance}
-            </h3>
+          <div>
+            <h1>{this.props.emergency.user.name}, {this.props.emergency.place == null ? "no location" : this.props.emergency.place.bounding_box.coordinates[0][0][1]}</h1>
+            <p>{this.props.emergency.text}</p>
+          </div>
         </CardContent>
         <CardActions className={classes.actions} disableActionSpacing>          
           <IconButton
@@ -64,9 +71,10 @@ class RecipeReviewCard extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <p>
-              {this.props.emergency.description}
-            </p>
+            <div>
+            <Button color="secondary" variant="contained" onClick={ () => window.open(mapUrl,'_blank')} className={classes.button}>Get Directions</Button>            
+            <Location emergency_location={ location}/>
+            </div>
           </CardContent>
         </Collapse>
       </Card>
