@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class Emergencies extends Component {
   render() {
     return this.props.emergencies.map((emergency) => (
-      <EmergencyItem key={emergency.id_str} emergency={emergency} myLoc={{myLoc: this.props.myLoc}}/>
+      emergency.place == null ? <div></div>: <EmergencyItem key={emergency.id_str} emergency={emergency} myLoc={{myLoc: this.props.myLoc}}/>
     ));
   }
 }
