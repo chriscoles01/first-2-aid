@@ -5,15 +5,35 @@ import marker from '../graphics-assets/Logo_32.png';
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
  
 class SimpleMap extends Component {
-  static defaultProps = {
-    
-    zoom: 18
-  };
+  distance(lat1, lon1, lat2, lon2) {
+    if ((lat1 === lat2) && (lon1 === lon2)) {
+      return 0;
+    }
+    else {
+      var radlat1 = Math.PI * lat1/180;
+      var radlat2 = Math.PI * lat2/180;
+      var theta = lon1-lon2;
+      var radtheta = Math.PI * theta/180;
+      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      if (dist > 1) {
+        dist = 1;
+      }
+      dist = Math.acos(dist);
+      dist = dist * 180/Math.PI;
+      dist = dist * 60 * 1.1515;
+      dist = dist * 1.609344 
+      return dist;
+    }
+  }
  
+ 
+  
   render() {
+    const zoom = 1000/this.distance(this.props.location.coords.latitude, this.props.location.coords.longitude, this.props.emergency_location.location[1], this.props.emergency_location.location[0])
+    console.log(zoom)
     const center = {
-        lat: this.props.location.coords.latitude,
-        lng: this.props.location.coords.longitude
+        lat: (this.props.location.coords.latitude + this.props.emergency_location.location[1]) / 2,
+        lng: (this.props.location.coords.longitude+ this.props.emergency_location.location[0]) / 2
     }
     return (
     
@@ -22,7 +42,7 @@ class SimpleMap extends Component {
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyDDh061bzOObTWtZjdF0Q1PROynuIiSMX4'}}
           defaultCenter={center}
-          defaultZoom={this.props.zoom}
+          defaultZoom={zoom}
         >
           <AnyReactComponent
             lat={this.props.location.coords.latitude}
@@ -30,8 +50,8 @@ class SimpleMap extends Component {
             text={<img src={marker} alt="marker" />}
           />
           <AnyReactComponent
-            lat={this.props.emergency_location.location[0]}
-            lng={this.props.emergency_location.location[1]}
+            lat={this.props.emergency_location.location[1]}
+            lng={this.props.emergency_location.location[0]}
             text={<img src={marker} alt="marker" />}
           />
         </GoogleMapReact>

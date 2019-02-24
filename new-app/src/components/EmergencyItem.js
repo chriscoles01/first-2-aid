@@ -51,13 +51,35 @@ class EmergencyItem extends React.Component {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  distance(lat1, lon1, lat2, lon2) {
+    if ((lat1 === lat2) && (lon1 === lon2)) {
+      return 0;
+    }
+    else {
+      var radlat1 = Math.PI * lat1/180;
+      var radlat2 = Math.PI * lat2/180;
+      var theta = lon1-lon2;
+      var radtheta = Math.PI * theta/180;
+      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+      if (dist > 1) {
+        dist = 1;
+      }
+      dist = Math.acos(dist);
+      dist = dist * 180/Math.PI;
+      dist = dist * 60 * 1.1515;
+      dist = dist * 1.609344 
+      return Math.round(dist);
+    }
+  }
+
   render() {
     const { classes } = this.props;
-    const userLng = this.props.emergency.userLng;
-    const userLat = this.props.emergency.userLat;
+    const userLng = this.props.myLoc.myLoc[1];
+    const userLat = this.props.myLoc.myLoc[0];
     const location  = this.props.emergency.place == null ? [0,0] : this.props.emergency.place.bounding_box.coordinates[0][0]
     const destLng = location[1];
     const destLat = location[0];
+    const distance = this.distance(userLat, userLng, destLat,destLng)
     const mapUrl = "http://maps.google.com/?saddr=" + userLng + "," + userLat + "&daddr=" + destLng + "," + destLat;
     
     return (
@@ -73,7 +95,7 @@ class EmergencyItem extends React.Component {
         />
         <CardContent>
           <div>
-            <h1>{this.props.emergency.user.name}, {this.props.emergency.place == null ? "no location: look at description" : this.props.emergency.place.full_name} </h1>
+            <h1>{this.props.emergency.user.name}, {this.props.emergency.place == null ? "no location: look at description" : this.props.emergency.place.full_name + ", " + distance + "km"} </h1>
             <p>{this.props.emergency.text}</p>
           </div>
         </CardContent>
