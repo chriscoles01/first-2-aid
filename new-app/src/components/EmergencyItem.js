@@ -8,9 +8,12 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import red from '@material-ui/core/colors/red';
+import green from '@material-ui/core/colors/green';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Location from './Location.js'
+import Avatar from '@material-ui/core/Avatar';
+import CardHeader from '@material-ui/core/CardHeader';
 
 
 const styles = theme => ({
@@ -19,21 +22,29 @@ const styles = theme => ({
     paddingTop: '56.25%', // 16:9
   },
   expand: {
-    transform: 'rotate(0deg)',
+    // transform: 'rotate(0deg)',
     marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+    // transition: theme.transitions.create('transform', {
+    //   duration: theme.transitions.duration.shortest,
+    // }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    // transform: 'rotate(180deg)',
   },
   avatar: {
     backgroundColor: red[500],
   },
+  finishedavatar: {
+    backgroundColor: green[500],
+  },
+  card: {
+    maxWidth: 800,
+    marginLeft: "auto",
+    marginRight: "auto",
+  }
 });
 
-class RecipeReviewCard extends React.Component {
+class EmergencyItem extends React.Component {
   state = { expanded: false };
 
   handleExpandClick = () => {
@@ -51,9 +62,18 @@ class RecipeReviewCard extends React.Component {
     
     return (
       <Card className={classes.card}>
+      <CardHeader
+          avatar={
+            <Avatar  className={classes.avatar}/>
+
+          }
+          
+          title= {"NEEDS ATTENTION,  " + this.props.emergency.created_at}
+
+        />
         <CardContent>
           <div>
-            <h1>{this.props.emergency.user.name}, {this.props.emergency.place == null ? "no location" : this.props.emergency.place.bounding_box.coordinates[0][0][1]}</h1>
+            <h1>{this.props.emergency.user.name}, {this.props.emergency.place == null ? "no location: look at description" : this.props.emergency.place.full_name} </h1>
             <p>{this.props.emergency.text}</p>
           </div>
         </CardContent>
@@ -64,8 +84,9 @@ class RecipeReviewCard extends React.Component {
             })}
             onClick={this.handleExpandClick}
             aria-expanded={this.state.expanded}
-            aria-label="Show more"
+           
           >
+          See location and directions
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
@@ -82,8 +103,8 @@ class RecipeReviewCard extends React.Component {
   }
 }
 
-RecipeReviewCard.propTypes = {
+EmergencyItem.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(RecipeReviewCard);
+export default withStyles(styles)(EmergencyItem);
