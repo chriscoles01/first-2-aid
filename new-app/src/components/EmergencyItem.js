@@ -17,6 +17,11 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 
 const styles = theme => ({
+  parent: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column'
+  },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
@@ -131,11 +136,12 @@ class EmergencyItem extends React.Component {
         </CardActions>
         <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <div>
+            <div className={classes.parent}>
             <Button color="secondary" variant="contained" onClick={ () => window.open(mapUrl,'_blank')} className={classes.button}>Get Directions</Button>            
             <Location emergency_location={ location}/>
+            
+            <Button onClick={() => {this.post()}} disabled={this.state.replySent} color="secondary" variant="contained">Post reply</Button>
             </div>
-            <Button onClick={() => {this.post()}}>Post reply</Button>
           </CardContent>
         </Collapse>
       </Card>
