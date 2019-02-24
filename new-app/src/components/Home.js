@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -7,18 +7,16 @@ import logo from '../graphics-assets/Logo_Font_Slogan.png';
 import Emergencies from './Emergencies.js'
 
 const styles = theme => ({
-  helpButton: {
-    maxWidth: 800,
-    marginLeft: "auto",
-    marginRight: "auto",
+  parent: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
-  loginButton: {
-    maxWidth: 800,
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-  
-
+  bigButton: {
+    display: 'flex',
+    width: 500,
+    height: 500
+  }
 });
 
 class Home extends React.Component{
@@ -26,34 +24,47 @@ class Home extends React.Component{
   
   componentDidMount() {
     fetch('http://127.0.0.1:5000/')
-      .then(response => response.json())
-      .then(data => this.setState({ emergencies: data }));
-      console.log(this.state)
+    .then(response => response.json())
+    .then(data => this.setState({ emergencies: data }));
+    console.log(this.state)
   }
-
+  getData = () => {
+    fetch('http://127.0.0.1:5000/')
+    .then(response => response.json())
+    .then(data => this.setState({ emergencies: data }));
+    console.log(this.state)
+}
+  
   state = {
     emergencies: [],
     myLoc: []
   }
 
   render (){
+    
     const { classes } = this.props;
-
+    
     return(
-      <Fragment>
-      
+      <div className={classes.parent}>
          
           <div>
-          <Button mx="auto" variant="contained" color="secondary">First Aider Login</Button>
+          <Button mx="auto" variant="contained" color="primary" >First Aider Login</Button>
           </div>
           <img src={logo} className="App-logo" alt="logo" />
-          
-          <Button className={classes.helpButton} size="lg" style={{marginLeft: "auto",marginRight: "auto"}} variant="contained" color="secondary">Help</Button>
+          <span className={classes.helpButton}>
+          <Button size="large"  classes={{ sizeLarge: classes.bigButton }} variant="contained" color="secondary">Get a first responder</Button>
+          </span>
+          <br/>
+          <br/>
+          <div>
+          <Button size="large"  variant="contained" color="primary" onClick={() => this.getData()}>Reload</Button>
 
           <Emergencies emergencies = {this.state.emergencies} myLoc = {this.state.myLoc}/>
- 
-      </Fragment>
+          </div>
+      </div>
+     
     );
+    
   }
 }
 Home.propTypes = {
